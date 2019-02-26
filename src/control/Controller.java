@@ -214,7 +214,11 @@ public class Controller {
 			line = kb.nextLine();
 		}
 		sopl("\n");
+<<<<<<< HEAD
 		cookbook.addRecipe(new Recipe(name, serving, ingredients));
+=======
+		//cookbook.addRecipe(new Recipe(name, serving, ingredients));
+>>>>>>> branch 'parfaitEdit' of https://github.com/Parfait-M/fuzzy-guacamole.git
 		
 	}
 }
