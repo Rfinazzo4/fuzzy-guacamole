@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public class Recipe {
 
 	private String recipeName;
-	private int serving;
+	private float serving;
 	private double exactServings;
 	private ArrayList<Ingredient> recipeIngredients;
 	
 	//might want to change controller to create recipe and pass said recipe to kb.
-	public Recipe(String recipeName, int serving, ArrayList<Ingredient> recipeIngredient){
+	public Recipe(String recipeName, float serving, ArrayList<Ingredient> recipeIngredient){
 		this.recipeName = recipeName;
 		this.serving = serving;
 		this.recipeIngredients = recipeIngredient;
@@ -36,14 +36,14 @@ public class Recipe {
 	/**
 	 * @return the serving
 	 */
-	public int getServing() {
+	public float getServing() {
 		return serving;
 	}
 
 	/**
 	 * @param serving the serving to set
 	 */
-	public void setServing(int serving) {
+	public void setServing(float serving) {
 		this.serving = serving;
 	}
 
@@ -98,9 +98,10 @@ public class Recipe {
 	}
 	
 	//private method to change the servings to be as exact as possible.
+	//need to edit so servings can be 1/2 a servings. change round feature.
 	private void ExactlyChangeServings(double ratio) {
 		exactServings = exactServings * ratio;
-		setServing((int) Math.round(exactServings));
+		setServing((float) Math.round(exactServings));
 	}
 	
 	//modify recipe where we can add ingredients/change name
