@@ -1,6 +1,7 @@
 package control;
 import model.CookBook;
 import model.Ingredient;
+import model.Recipe;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -97,8 +98,8 @@ public class Controller {
 		
 	}
 	private static void viewAllRecipe() {
-//		for(String s : cookbook.getRecipeList())
-//			sopl(s);
+		for(String s : cookbook.getRecipeList())
+			sopl(s);
 	}
 	private static void viewRecipe() {
 		String name;
@@ -187,7 +188,7 @@ public class Controller {
 		
 		sop("Enter name of recipe: ");
 		name = kb.nextLine();
-		//kb.next();
+	
 		do {
 			sop("Enter serving size: ");
 			if(kb.hasNextFloat()) {
@@ -213,7 +214,8 @@ public class Controller {
 			line = kb.nextLine();
 		}
 		sopl("\n");
-		//cookbook.addRecipe(new Recipe(name, serving, ingredients));
+		cookbook.addRecipe(new Recipe(name, serving, ingredients));
+
 		
 	}
 }
