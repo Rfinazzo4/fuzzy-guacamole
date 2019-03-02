@@ -1,7 +1,10 @@
 package control;
 import model.CookBook;
 import model.Ingredient;
+import model.Recipe;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -23,7 +26,15 @@ public class Controller {
 	// Default constructor takes in name of input file and creates a CookBook
 	// Ideally, this file will be the same one from previous runs
 	Controller(String filename){
-		cookbook = new CookBook(filename);
+		try {
+			cookbook = new CookBook(filename);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	// Menu method just returns the user's menu selection. Input validation loop
@@ -87,8 +98,8 @@ public class Controller {
 		
 	}
 	private static void viewAllRecipe() {
-//		for(String s : cookbook.getRecipeList())
-//			sopl(s);
+		for(String s : cookbook.getRecipeList())
+			sopl(s);
 	}
 	private static void viewRecipe() {
 		String name;
@@ -96,8 +107,8 @@ public class Controller {
 		name = kb.nextLine();
 		do {
 			try {
-				//String recipe = cookbook.getRecipe(name);
-				//sopl(recipe);
+				String recipe = cookbook.getRecipe(name);
+				sopl(recipe);
 				break;
 			}catch(Exception e) {
 				sopl(e.getMessage() + " Would you like to try again (y|n)? "); 
@@ -114,7 +125,7 @@ public class Controller {
 		name = kb.nextLine();
 		do {
 			try {
-				//cookbook.modifyRecipe(name);
+				cookbook.modifyRecipe(name);
 				break;
 			}catch(Exception e) {
 				sopl(e.getMessage() + " Would you like to try again (y|n)? ");
@@ -133,7 +144,7 @@ public class Controller {
 		name = kb.nextLine();
 		do {
 			try {
-				//cookbook.deleteRecipe(name);
+				cookbook.deleteRecipe(name);
 				break;
 			}catch(Exception e) {
 				sopl(e.getMessage() + " Would you like to try again (y|n)? ");
@@ -155,7 +166,7 @@ public class Controller {
 		
 		do {
 			try {
-				//cookbook.addRecipes(filename);
+				cookbook.addRecipes(filename);
 				break;
 			}catch (Exception e) {
 				sopl(e.getMessage() + " Would you like to try again (y|n)? ");
@@ -177,7 +188,7 @@ public class Controller {
 		
 		sop("Enter name of recipe: ");
 		name = kb.nextLine();
-		//kb.next();
+	
 		do {
 			sop("Enter serving size: ");
 			if(kb.hasNextFloat()) {
@@ -203,7 +214,8 @@ public class Controller {
 			line = kb.nextLine();
 		}
 		sopl("\n");
-		//cookbook.addRecipe(name, ingredients, serving);
+		cookbook.addRecipe(new Recipe(name, serving, ingredients));
+
 		
 	}
 }
