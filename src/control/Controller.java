@@ -2,6 +2,7 @@ package control;
 import model.CookBook;
 import model.Ingredient;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class Controller {
 	
 	// Default constructor takes in name of input file and creates a CookBook
 	// Ideally, this file will be the same one from previous runs
-	Controller(String filename){
+	Controller(String filename) throws FileNotFoundException{
 		cookbook = new CookBook(filename);
 	}
 	
@@ -54,7 +55,7 @@ public class Controller {
 		return choice;
 	}
 	
-	public static void main(String [] args) {
+	public static void main(String [] args) throws FileNotFoundException {
 		if(args.length == 1)
 			new Controller(args[0]);
 		else
