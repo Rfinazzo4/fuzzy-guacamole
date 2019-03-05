@@ -1,3 +1,4 @@
+
 package control;
 import model.*;
 import view.View;
@@ -201,7 +202,5 @@ public class Controller {
 		}
 		view.sopl("\n");
 		cookbook.addRecipe(new Recipe(name, serving, ingredients));
-
-		
 	}
 }
