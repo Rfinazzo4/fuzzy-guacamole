@@ -65,7 +65,7 @@ public class Controller {
 		return choice;
 	}
 	
-	public static void main(String [] args) {
+	public static void main(String [] args) throws FileNotFoundException {
 		if(args.length == 1)
 			new Controller(args[0]);
 		else
