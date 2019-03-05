@@ -33,7 +33,7 @@ public class Ingredient {
 			name = line.substring(line.indexOf(" ")+ 1);
 		}
 		else
-			throw new Exception("Invalid syntax!");
+			throw new Exception(GuacException.INVALID_SYNTAX);
 	}
 	
 	public String getMeasurement() {
