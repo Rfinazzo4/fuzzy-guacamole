@@ -5,9 +5,17 @@ public class CookBook {
 	private HashMap <String, Recipe > recipes = new HashMap<String, Recipe>();
 	// -->  <Recipe name, Recipe instance>
 
-	public CookBook(String fileName) throws Exception {
-		BufferedReader in = new BufferedReader(new FileReader(fileName));
+	public CookBook(String fileName) throws Exception{
+		
+		BufferedReader in;
 		//read in file add to recipes
+		try {
+			in = new BufferedReader(new FileReader(fileName));
+		} catch (FileNotFoundException e) {
+			throw new Exception(GuacException.FILE_NOT_FOUND);
+		}
+		
+		
 		
 		//Create local variable for creating ingredients and recipes
 		String line = "";
@@ -44,7 +52,7 @@ public class CookBook {
 	
 	//Getters
 	public HashMap <String, Recipe> getRecipes(){
-		//returns the hasmap of recipes
+		//returns the hashap of recipes
 		return recipes;
 	}
 	
@@ -60,9 +68,14 @@ public class CookBook {
 	
 	
 	public void addRecipes(String fileName) throws Exception{
-		//read in a single recipe, add to recipes
-		BufferedReader in = new BufferedReader(new FileReader(fileName));
+		
+		BufferedReader in;
 		//read in file add to recipes
+		try {
+			in = new BufferedReader(new FileReader(fileName));
+		} catch (FileNotFoundException e) {
+			throw new Exception(GuacException.FILE_NOT_FOUND);
+		}
 		
 		//Create local variable for creating ingredients and recipes
 		String line = "";
