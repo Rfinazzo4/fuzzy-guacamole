@@ -8,15 +8,13 @@ public class Recipe {
 
 	private String recipeName;
 	private float serving;
-	private double exactServings;
 	private ArrayList<Ingredient> recipeIngredients;
 	
-	//might want to change controller to create recipe and pass said recipe to kb.
+	// Constructor
 	public Recipe(String recipeName, float serving, ArrayList<Ingredient> recipeIngredient){
 		this.recipeName = recipeName;
 		this.serving = serving;
 		this.recipeIngredients = recipeIngredient;
-		this.exactServings = serving;
 	}
 
 	/**
@@ -72,6 +70,7 @@ public class Recipe {
 	}
 	
 	@Override
+	//to string for recipe will print the whole recipe
 	public String toString() {
 		return recipeName +"\nServings: " + serving 
 				+ "\nList of Ingredients:\n" + getIngredient();
@@ -87,22 +86,23 @@ public class Recipe {
 			}
 		}
 		if(currentQuantity == -1.0)
-			throw new Exception("Ingredient not found.");
+			throw new Exception(GuacException.INGREDIENT_NOT_FOUND);
 		ratio = quantity / currentQuantity;
 		
 		for(Ingredient  I: recipeIngredients) {
 			I.setQuantity(ratio * I.getQuantity());
 		}
 		
-		ExactlyChangeServings(ratio);
+		//ExactlyChangeServings(ratio);
 	}
 	
 	//private method to change the servings to be as exact as possible.
 	//need to edit so servings can be 1/2 a servings. change round feature.
-	private void ExactlyChangeServings(double ratio) {
-		exactServings = exactServings * ratio;
-		setServing((float) Math.round(exactServings));
-	}
+//	private void ExactlyChangeServings(double ratio) {
+//		exactServings = exactServings * ratio;
+//		setServing((float) Math.round(exactServings));
+//	}
+//	
 	
 	//modify recipe where we can add ingredients/change name
 	
