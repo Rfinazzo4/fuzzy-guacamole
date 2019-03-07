@@ -24,12 +24,10 @@ public class Controller {
 	// Ideally, this file will be the same one from previous runs
 	Controller(String filename){
 		try {
+			kb = new Scanner(System.in);
 			cookbook = new CookBook(filename);
 			view = new View();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -65,6 +63,7 @@ public class Controller {
 				viewAllRecipe();
 				break;
 			}
+			view.sopl("\n\n\n");
 		}while(choice != QUIT);
 		if(args.length == 1)
 			exit(args[0]);
@@ -107,22 +106,59 @@ public class Controller {
 		view.sopl("\n");
 	}
 	private static void modifyRecipe() {
-		String name;
+		int choice;
+		do {
+			choice = view.modRecipe();
+			if(choice == 3) {
+				do {
+					choice = view.modIngredient();
+					switch(choice) {
+					case 1: modAddIngr();
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					}
+				}while(choice != 4);
+				switch(choice) {
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				}
+			}
+			
+		}while(choice != 4);
+		view.sopl("\n");
+	}
+
+	// Modify recipe: Add Ingredient
+	private static void modAddIngr() {
+		String name, line;
 		view.sop("Enter the recipe name: ");
 		name = kb.nextLine();
 		do {
 			try {
-				cookbook.modifyRecipe(name);
-				break;
-			}catch(Exception e) {
-				view.sopl(e.getMessage() + " Would you like to try again (y|n)? ");
+				view.sopl("Enter your Ingredients in the format:");
+				view.sopl("\n[quantity] [measurement [of]] [name]");
+				view.sopl("Example: 4 cups of baking powder.");
+				view.sop(">");
+				line = kb.nextLine();
+				cookbook.addIngredientToRecipe(name, new Ingredient(line));
+				
+			}catch (Exception e) {
+				view.sopl(e.getMessage() + view.TRY_AGAIN);
 				String ch = kb.nextLine();
 				if(!ch.equalsIgnoreCase("y"))
 					break;
 			}
 		}while(true);
-		view.sopl("\n");
 	}
+
+
 	private static void removeRecipe() {
 		// Tries to remove a recipe, if it doens't exist, asks
 		// the user to try again or give up
@@ -134,7 +170,7 @@ public class Controller {
 				cookbook.deleteRecipe(name);
 				break;
 			}catch(Exception e) {
-				view.sopl(e.getMessage() + " Would you like to try again (y|n)? ");
+				view.sopl(e.getMessage() + view.TRY_AGAIN);
 				String ch = kb.nextLine();
 				if(!ch.equalsIgnoreCase("y"))
 					break;
