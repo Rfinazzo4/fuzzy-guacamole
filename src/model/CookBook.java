@@ -2,53 +2,158 @@ package model;
 import java.io.*;
 import java.util.*;
 public class CookBook {
-	private HashMap <String, Recipe > cookbook = new HashMap<String, Recipe>();
+	private HashMap <String, Recipe > recipes = new HashMap<String, Recipe>();
 	// -->  <Recipe name, Recipe instance>
 
-	public CookBook(String fileName) throws FileNotFoundException, IOException {
+	public CookBook(String fileName) throws Exception {
 		BufferedReader in = new BufferedReader(new FileReader(fileName));
-		//read in file add to cookbook
-	}
-	
-	public void addRecipes(String fileName) {
-		//read in a single recipe, add to cookbook
+		//read in file add to recipes
 		
+		//Create local variable for creating ingredients and recipes
+		String line = "";
+		String key;
+		float serving;
+		ArrayList<Ingredient> ingred = new ArrayList<Ingredient>();
+		
+		//Start reading the file
+		while((line=in.readLine())!=null) { //if at EOF, break out of loop
+			//read in the key(recipe name) for the recipes
+			key = line;
+			//read in serving size 
+			serving = Float.parseFloat(in.readLine());
+			
+			//check for whitespace
+			line = in.readLine();
+			while (line.equals("")) {
+				line = in.readLine();
+			}
+			
+			//loop through ingredients
+			while(line!="======="&&line!=null){
+				//add to ingredient list and read next possible ingredient
+				ingred.add(new Ingredient(line));
+				line = in.readLine();
+			}
+			
+			//finally, create recipe and add to our recipes
+			Recipe toAdd = new Recipe(key, serving, ingred);
+			this.recipes.put(toAdd.getRecipeName(), toAdd);
+		}
+			
 	}
 	
-	public void addRecipe(String name, List<Ingredient> ingred, int serving) {
-		//Create a recipe, the proceed to add to the cookbook
-		Recipe toAdd = new Recipe(name, ingred, serving);
-		cookbook.put(name, toAdd);
-	}
-	
-	public void deleteRecipe(String name) {
-		//remove a recipe from the cookbook(map)
-		cookbook.remove(name);
+	//Getters
+	public HashMap <String, Recipe> getRecipes(){
+		//returns the hasmap of recipes
+		return recipes;
 	}
 	
 	public String getRecipe(String name) {
-		//returns the recipe in string format
-		return cookbook.get(name).toString();
+		//returns the specific recipe in string format
+		return recipes.get(name).toString();
 	}
 	
 	public Set<String> getRecipeList() {
 		//returns the set of recipes names(keys)
-		return cookbook.keySet();
+		return recipes.keySet();
 	}
 	
-	public void modifyRecipe(String name) {
-		//retrieves the value at key(name)
-		//then will prompt the user to edit any of the information
-		//Then will edit the value.
+	
+	public void addRecipes(String fileName) throws Exception{
+		//read in a single recipe, add to recipes
+		BufferedReader in = new BufferedReader(new FileReader(fileName));
+		//read in file add to recipes
+		
+		//Create local variable for creating ingredients and recipes
+		String line = "";
+		String key;
+		float serving;
+		ArrayList<Ingredient> ingred = new ArrayList<Ingredient>();
+		
+		//Start reading the file
+		while((line=in.readLine())!=null) { //if at EOF, break out of loop
+			//read in the key(recipe name) for the recipes
+			key = line;
+			//read in serving size 
+			serving = Float.parseFloat(in.readLine());
+			
+			//check for whitespace
+			line = in.readLine();
+			while (line.equals("")) {
+				line = in.readLine();
+			}
+			
+			//loop through ingredients
+			while(line!="======="&&line!=null){
+				//add to ingredient list and read next possible ingredient
+				ingred.add(new Ingredient(line));
+				line = in.readLine();
+			}
+			
+			//finally, create recipe and add to our recipes
+			Recipe toAdd = new Recipe(key, serving, ingred);
+			recipes.put(toAdd.getRecipeName(), toAdd);
+		}
+		
+	}
+	
+	public void addRecipe(Recipe toAdd) {
+		//Create a recipe, the proceed to add to the recipes
+		recipes.put(toAdd.getRecipeName(), toAdd);
+	}
+	
+	public void deleteRecipe(String name) {
+		//remove a recipe from the recipes(map)
+		recipes.remove(name);
+	}
+	
+	
+	public void modifyRecipe(String oldName, String newName) {
+		//This method modifies the recipe name
+		
+		//set old object to temporary object
+		Recipe temp = recipes.get(oldName);
+		
+		//remove old object
+		recipes.remove(oldName);
+		
+		//change old recipe name to new recipe name
+		temp.setRecipeName(newName);
+		
+		
+		//add new key value pair to the hashmap
+		recipes.put(newName,temp);
+		
+	}
+	
+	
+	public void modifyRecipeServingSize(String name, float newSize) {
+		//modify the serving size of the ingredient
+		recipes.get(name).setServing(newSize);
+	}
+	
+	public void addIngredientToRecipe(String rName, Ingredient ing) {
+		//@@@@@@@@@@@@
+		recipes.get(rName).addIngredient(ing);
+	}
+	
+	public void modifyIngredientQty(String rName, Ingredient ing, float Qty) {
+		//not set in stone
+		//@@@@@@@@@@@@@
+		recipes.get(rName).modifyIngredientQty(ing, Qty);
+	}
+	
+	public void modifyIngredientName(String rName, Ingredient ing, String newName) {
+		recipes.get(rName).modifyIngredientName(ing, newName);
 	}
 	
 	@Override
 	public String toString() {
 		String toPrint="";
-		for (HashMap.Entry<String, Recipe> entry : cookbook.entrySet()) {
+		for (HashMap.Entry<String, Recipe> entry : recipes.entrySet()) {
 			toPrint+=entry.getValue().toString();
 			toPrint+="\n=======\n";
 		}
 		return toPrint;
-	} 
+	}
 }

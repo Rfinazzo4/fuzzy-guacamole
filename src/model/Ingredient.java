@@ -19,7 +19,7 @@ public class Ingredient {
 		// methods as the indexOf() coupled with substring is actually
 		// much faster than the other two.
 		String pattern1 = "\\d+\\s+\\w+\\sof\\s[\\w\\s]+$";
-		String pattern2 = "\\d+\\s[^(of)][\\w\\s]+$";
+		String pattern2 = "\\d+\\s(?!of)[\\w\\s]+$";
 		int pos = 0;
 		if(line.matches(pattern1)) {
 			pos = line.indexOf(" ");
@@ -33,7 +33,7 @@ public class Ingredient {
 			name = line.substring(line.indexOf(" ")+ 1);
 		}
 		else
-			throw new Exception("Invalid syntax!");
+			throw new Exception(GuacException.INVALID_SYNTAX);
 	}
 	
 	public String getMeasurement() {
