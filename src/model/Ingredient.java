@@ -5,6 +5,9 @@ public class Ingredient {
 	private String measurement;
 	double quantity;
 	
+	
+
+	
 	public Ingredient(String name, String measurement, double quantity){
 		this.name = name;
 		this.measurement = measurement;
