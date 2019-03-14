@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>114</x>
+      <y>42</y>
+      <w>258</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FuzzyGuac&gt;&gt;
+Model::CookBook
+--
+-HashMap&lt;&gt;: Recipe
+
+--
++CookBook(filename: String)
++addRecipes(filename: String): void
++addRecipe(recipe: Recipe): void
++deleteRecipe(name: String): void
++getRecipe(name: String): String // calls recipe toString()
++getRecipeList(): String or List&lt;String&gt; // return list of recipe names
++setRecName(oldName: String, newName: String): void		
++setRecServing(name: String, serving: float): void
++addIngredient(recName: String, ingr: Ingredient): void
++setIngName(recName: String, oldName: String, newName: String): void
++setIngQty(recName: String, name: String, qty: double): void
++toString(): String
+
+--
+Responsibilities
+-- toString() method responsible for printing our CookBook to a file
+-- modify method has a menu feature that allows user to choose 
+   what they want to modify and then how.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>438</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FuzzyGuac&gt;&gt;
+Model::Ingredient
+--
+-name: String
+-measurement: Measurement()
+--
++toString(): String
++accessors
++mutators
++Ingredient(line: String)
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>132</x>
+      <y>378</y>
+      <w>222</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FuzzyGuac&gt;&gt;
+Model::Recipe
+--
+-name: String
+-servings: float
+-Map&lt;&gt; or List&lt;&gt; : Ingredients
+--
++Recipe(name: String, serving: float, ingredients: List&lt;&gt;)
++toString(): String // prints itself
++acessors
++mutators
++getIngredients(): String // calls toString on all ingredients
++modifyIngredient(name: string, quant: double): void
+--
+Responsibilities
+-- Manage the ingredients
+-- Be able to modify the quantity of one ingredient,
+    thereby modifying the whole ingrfedient list and
+    possible serving size</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>72</y>
+      <w>246</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FuzzyGuac&gt;&gt;
+Control::Controller
+--
+-cookBook: CookBook
+
+--
++Controller()
++main(): void
+-menu(): int or menuItem
+-- addRecipe(): void
+-- removeRecipe(): void
+-- ModifyRecipe(): void
+---- ModifyRecipe Sub Functions (from View CookBookMenu)
+-- listAllRecipes(): void
+-- getRecipe(): void
+-- loadCookBook(): void
+-- exit(filename: String): void
+
+--
+Responsibilities
+-- menu() is responsible for interacting with user and
+	providing result that will be used to call associated 
+	method.
+-- Upon calling Exit(), it will call the CookBook object's 
+	toString() method to print out the whole book to a file,
+	then quit the program.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>348</x>
+      <y>456</y>
+      <w>126</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>204</x>
+      <y>270</y>
+      <w>30</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>366</x>
+      <y>60</y>
+      <w>354</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>570.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>456</x>
+      <y>162</y>
+      <w>144</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FuzzyGuac&gt;&gt;
+Model::GuacExceptions
+{Interface}
+--
++INVALID_SYNTAX: final static String
+
+--
+Responsibilities:
+--Class contains all exceptions that
+   we create and throw.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>438</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FuzzyGuac&gt;&gt;
+Model::Measurement
+--
+-type: String
+-quantity: double
+--
++toString(): String
++accessors
++mutators
++Ingredient(line: String)
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>582</x>
+      <y>462</y>
+      <w>78</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>828</x>
+      <y>360</y>
+      <w>174</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FuzzyGuac&gt;&gt;
+View::View
+--
+-id: Long
++TRY_AGAIN: final static String
+--
++controlMenu(): int
++modRecipe(): int
+---- oprions:
+---- 1. Modify name
+---- 2. Modify serving
+---- 3. Modify Ingredient
++modIngredient(): int
+---- options:
+---- 1. Add Ingredient
+---- 2. Modify Name
+---- 3. Modify Qty
++sopl(o: Object): void
++sop(o: Object): void
+--
+Responsibilities
+-- Handle user interactions and printing</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>306</x>
+      <y>270</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>380.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>366</x>
+      <y>186</y>
+      <w>102</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>150.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>594</x>
+      <y>240</y>
+      <w>126</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>816</x>
+      <y>282</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;130.0</additional_attributes>
+  </element>
+</diagram>

@@ -162,18 +162,18 @@ public class CookBook {
 		recipes.get(name).setServing(newSize);
 	}
 	
-	public void addIngredientToRecipe(String rName, Ingredient ing) {
+	public void addIngredientToRecipe(String rName, Ingredient ing) throws Exception {
 		//@@@@@@@@@@@@
 		recipes.get(rName).addIngredient(ing);
 	}
 	
-	public void modifyIngredientQty(String rName, Ingredient ing, float Qty) {
+	public void modifyIngredientQty(String rName, Ingredient ing, float Qty) throws Exception {
 		//not set in stone
 		//@@@@@@@@@@@@@
 		recipes.get(rName).modifyIngredientQty(ing, Qty);
 	}
 	
-	public void modifyIngredientName(String rName, Ingredient ing, String newName) {
+	public void modifyIngredientName(String rName, Ingredient ing, String newName) throws Exception {
 		recipes.get(rName).modifyIngredientName(ing, newName);
 	}
 	
