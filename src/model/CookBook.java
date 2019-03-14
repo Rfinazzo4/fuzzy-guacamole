@@ -19,6 +19,7 @@ public class CookBook {
 		//Create local variables for creating ingredients and recipes
 		String line = "";
 		String key;
+		String [] parseLine;
 		float serving;
 		ArrayList<Ingredient> ingred = new ArrayList<Ingredient>();
 		
@@ -29,7 +30,8 @@ public class CookBook {
 			//read in the key(recipe name) for the recipes
 			key = line;
 			//read in serving size 
-			serving = Float.parseFloat(in.readLine());
+			parseLine = in.readLine().split(" ");
+			serving = Float.parseFloat(parseLine[1]);
 			
 			//Read in ingredient header, we parse 
 			// this out as it is not necessary
@@ -85,6 +87,7 @@ public class CookBook {
 		String line = "";
 		String key;
 		float serving;
+		String[] parseLine;
 		ArrayList<Ingredient> ingred = new ArrayList<Ingredient>();
 		
 		
@@ -93,12 +96,15 @@ public class CookBook {
 			
 			//read in the key(recipe name) for the recipes
 			key = line;
+	
 			//read in serving size 
-			serving = Float.parseFloat(in.readLine());
+			parseLine = in.readLine().split(" ");
+			serving = Float.parseFloat(parseLine[1]);
 			
 			//Read in ingredient header, we parse 
 			// this out as it is not necessary
 			line = in.readLine();
+			
 			
 			
 			//loop through ingredients
