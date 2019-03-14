@@ -6,54 +6,8 @@ public class CookBook {
 	// -->  <Recipe name, Recipe instance>
 
 	public CookBook(String fileName) throws Exception{ 
-		
-		BufferedReader in;
-		//read in file add to recipes
-		
-		try {
-			in = new BufferedReader(new FileReader(fileName));
-		} catch (FileNotFoundException e) {
-			throw new Exception(GuacException.FILE_NOT_FOUND);
-		}
-		
-		
-		//Create local variables for creating ingredients and recipes
-		String line = "";
-		String key;
-		String [] parseLine;
-		float serving;
-		ArrayList<Ingredient> ingred = new ArrayList<Ingredient>();
-		
-		
-		//Start reading the file
-		while((line=in.readLine())!=null) { //if at EOF, break out of loop
-			
-			//read in the key(recipe name) for the recipes
-			key = line;
-			//read in serving size 
-			parseLine = in.readLine().split(" ");
-			serving = Float.parseFloat(parseLine[1]);
-			
-			//Read in ingredient header, we parse 
-			// this out as it is not necessary
-			line = in.readLine();
-			
-			
-			//loop through ingredients
-			while(line!=null && !line.equals("=======")){
-				//add to ingredient list and read next possible ingredient
-				line = in.readLine();
-				ingred.add(new Ingredient(line));
-			}
-			
-			//finally, create recipe and add to our recipes
-			Recipe toAdd = new Recipe(key, serving, ingred);
-			if (!this.recipes.containsKey(toAdd.getRecipeName())){
-				this.recipes.put(toAdd.getRecipeName(), toAdd);
-			}
-			
-		}
-			
+		//Call add recipes
+		addRecipes(fileName);	
 	}
 	
 	//Getters
@@ -105,8 +59,6 @@ public class CookBook {
 			//Read in ingredient header, we parse 
 			// this out as it is not necessary
 			line = in.readLine();
-			
-			
 			
 			//loop through ingredients
 			while(line!=null && !line.equals("=======")){
