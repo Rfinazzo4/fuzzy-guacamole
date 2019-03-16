@@ -5,49 +5,9 @@ public class CookBook {
 	private HashMap <String, Recipe > recipes = new HashMap<String, Recipe>();
 	// -->  <Recipe name, Recipe instance>
 
-	public CookBook(String fileName) throws Exception{
-		
-		BufferedReader in;
-		//read in file add to recipes
-		try {
-			in = new BufferedReader(new FileReader(fileName));
-		} catch (FileNotFoundException e) {
-			throw new Exception(GuacException.FILE_NOT_FOUND);
-		}
-		
-		
-		
-		//Create local variable for creating ingredients and recipes
-		String line = "";
-		String key;
-		float serving;
-		ArrayList<Ingredient> ingred = new ArrayList<Ingredient>();
-		
-		//Start reading the file
-		while((line=in.readLine())!=null) { //if at EOF, break out of loop
-			//read in the key(recipe name) for the recipes
-			key = line;
-			//read in serving size 
-			serving = Float.parseFloat(in.readLine());
-			
-			//check for whitespace
-			line = in.readLine();
-			while (line.equals("")) {
-				line = in.readLine();
-			}
-			
-			//loop through ingredients
-			while(line!="======="&&line!=null){
-				//add to ingredient list and read next possible ingredient
-				ingred.add(new Ingredient(line));
-				line = in.readLine();
-			}
-			
-			//finally, create recipe and add to our recipes
-			Recipe toAdd = new Recipe(key, serving, ingred);
-			this.recipes.put(toAdd.getRecipeName(), toAdd);
-		}
-			
+	public CookBook(String fileName) throws Exception{ 
+		//Call add recipes
+		addRecipes(fileName);	
 	}
 	
 	//Getters
@@ -77,42 +37,51 @@ public class CookBook {
 			throw new Exception(GuacException.FILE_NOT_FOUND);
 		}
 		
-		//Create local variable for creating ingredients and recipes
+		
+		//Create local variables for creating ingredients and recipes
 		String line = "";
 		String key;
 		float serving;
+		String[] parseLine;
 		ArrayList<Ingredient> ingred = new ArrayList<Ingredient>();
+		
 		
 		//Start reading the file
 		while((line=in.readLine())!=null) { //if at EOF, break out of loop
+			
 			//read in the key(recipe name) for the recipes
 			key = line;
+	
 			//read in serving size 
-			serving = Float.parseFloat(in.readLine());
+			parseLine = in.readLine().split(" ");
+			serving = Float.parseFloat(parseLine[1]);
 			
-			//check for whitespace
+			//Read in ingredient header, we parse 
+			// this out as it is not necessary
 			line = in.readLine();
-			while (line.equals("")) {
-				line = in.readLine();
-			}
 			
 			//loop through ingredients
-			while(line!="======="&&line!=null){
+			while(line!=null && !line.equals("=======")){
 				//add to ingredient list and read next possible ingredient
-				ingred.add(new Ingredient(line));
 				line = in.readLine();
+				ingred.add(new Ingredient(line));
 			}
 			
 			//finally, create recipe and add to our recipes
 			Recipe toAdd = new Recipe(key, serving, ingred);
-			recipes.put(toAdd.getRecipeName(), toAdd);
+			if (!this.recipes.containsKey(toAdd.getRecipeName())){
+				this.recipes.put(toAdd.getRecipeName(), toAdd);
+			}
+			
 		}
-		
+			
 	}
 	
 	public void addRecipe(Recipe toAdd) {
 		//Create a recipe, the proceed to add to the recipes
-		recipes.put(toAdd.getRecipeName(), toAdd);
+		if (!this.recipes.containsKey(toAdd.getRecipeName())){
+			this.recipes.put(toAdd.getRecipeName(), toAdd);
+		}
 	}
 	
 	public void deleteRecipe(String name) {
