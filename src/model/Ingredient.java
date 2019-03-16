@@ -23,8 +23,8 @@ public class Ingredient {
 		// I am not using the split(regex) nor the StringTokenizer()
 		// methods as the indexOf() coupled with substring is actually
 		// much faster than the other two.
-		String pattern1 = "\\d+\\s+\\w+\\sof\\s[\\w\\s]+$";
-		String pattern2 = "\\d+\\s(?!of)[\\w\\s]+$";
+		String pattern1 = "\\d+.?\\d*\\s+\\w+\\sof\\s[\\w\\s]+$";
+		String pattern2 = "\\d+.?\\d*\\s(?!of)[\\w\\s]+$";
 		String measurementType = null;
 		int pos = 0;
 		double quantity;
