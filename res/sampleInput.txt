@@ -1,6 +1,6 @@
 Tacos Al Pastor
-4
-
+Servings: 4
+List of Ingredients:
 8 cups of Al pastor meat
 16 corn tortillas
 1 cup of salsa
@@ -8,7 +8,8 @@ Tacos Al Pastor
 1 cup of cilantro
 =======
 Cinnamon French Toast
-7
+Servings: 7
+List of Ingredients:
 3 eggs
 2 cups of cinnamon sauce
 1 cup of milk

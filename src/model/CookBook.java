@@ -59,12 +59,13 @@ public class CookBook {
 			//Read in ingredient header, we parse 
 			// this out as it is not necessary
 			line = in.readLine();
+			line = in.readLine();
 			
 			//loop through ingredients
 			while(line!=null && !line.equals("=======")){
 				//add to ingredient list and read next possible ingredient
-				line = in.readLine();
 				ingred.add(new Ingredient(line));
+				line = in.readLine();
 			}
 			
 			//finally, create recipe and add to our recipes
@@ -72,7 +73,6 @@ public class CookBook {
 			if (!this.recipes.containsKey(toAdd.getRecipeName())){
 				this.recipes.put(toAdd.getRecipeName(), toAdd);
 			}
-			
 		}
 			
 	}
