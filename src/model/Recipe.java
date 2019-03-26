@@ -14,7 +14,7 @@ public class Recipe {
 	public Recipe(String recipeName, float serving, ArrayList<Ingredient> recipeIngredient){
 		this.recipeName = recipeName;
 		this.serving = serving;
-		this.recipeIngredients = recipeIngredient;
+		this.recipeIngredients = new ArrayList<>(recipeIngredient);
 	}
 
 	//Getter/Setters for RecipeName
