@@ -48,31 +48,37 @@ public class CookBook {
 		
 		//Start reading the file
 		while((line=in.readLine())!=null) { //if at EOF, break out of loop
-			
+		
 			//read in the key(recipe name) for the recipes
 			key = line;
-	
 			//read in serving size 
 			parseLine = in.readLine().split(" ");
+			
+			
 			serving = Float.parseFloat(parseLine[1]);
 			
 			//Read in ingredient header, we parse 
 			// this out as it is not necessary
 			line = in.readLine();
 			line = in.readLine();
+		
 			
 			//loop through ingredients
-			while(line!=null && !line.equals("=======")){
+			while(line!=null && !line.isEmpty() && !line.equals("=======")){
 				//add to ingredient list and read next possible ingredient
+				
 				ingred.add(new Ingredient(line));
 				line = in.readLine();
+				
 			}
-			
+			System.out.println("here");
 			//finally, create recipe and add to our recipes
 			Recipe toAdd = new Recipe(key, serving, ingred);
 			if (!this.recipes.containsKey(toAdd.getRecipeName())){
 				this.recipes.put(toAdd.getRecipeName(), toAdd);
 			}
+			//parse final "=====" out
+			line = in.readLine();
 		}
 			
 	}

@@ -16,7 +16,7 @@ public class Controller {
 	private static View view;
 	private static Scanner kb;
 	// DEFAULT_INPUT file is used when no file is provided via command line
-	private static final String DEFAULT_INPUT = "res\\sampleInput.txt";
+	private static final String DEFAULT_INPUT = "res/sampleInput.txt";
 	private static final int QUIT = 7;
 	
 	
