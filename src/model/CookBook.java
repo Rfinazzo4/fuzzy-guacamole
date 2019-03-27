@@ -12,7 +12,7 @@ public class CookBook {
 	
 	//Getters
 	public HashMap <String, Recipe> getRecipes(){
-		//returns the hashap of recipes
+		//returns the hash map of recipes
 		return recipes;
 	}
 	
